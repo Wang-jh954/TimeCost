@@ -1,4 +1,4 @@
-// DOM元素引用
+// DOM元素引用 123
 const calculateBtn = document.getElementById('calculateBtn');
 const shareBtn = document.getElementById('shareBtn');
 const resultDiv = document.getElementById('result');
