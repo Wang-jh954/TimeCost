@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeCost · 你的消费值多少生命时间</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>⏳ TimeCost</h1>
+    <p class="subtitle">你的消费，值多少生命时间？</p>
+    
+    <div class="calculator">
+        <div class="input-group">
+            <label for="income">你的月收入（元）</label>
+            <input type="number" id="income" value="5000">
+        </div>
+        
+        <div class="input-group">
+            <label for="workDays">每月工作天数</label>
+            <input type="number" id="workDays" value="22">
+        </div>
+        
+        <div class="input-group">
+            <label for="hoursPerDay">每天工作小时数</label>
+            <input type="number" id="hoursPerDay" value="8">
+        </div>
+        
+        <div class="input-group">
+            <label for="itemPrice">你想购买的商品价格（元）</label>
+            <input type="number" id="itemPrice" placeholder="例如：6666">
+        </div>
+        
+        <button id="calculateBtn">计算我的生命成本</button>
+        
+        <div id="result" class="result">
+            <h2>📊 计算结果</h2>
+            <p id="timeCost"></p>
+            <p id="comparison" class="comparison"></p>
+            <button id="shareBtn" class="share-btn">分享结果</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
