@@ -1,3 +1,18 @@
+// 禁止查看源代码
+document.oncontextmenu = function () {
+    alert('禁止使用右键菜单');
+    return false;
+}
+document.onkeydown = function (e) {
+    if (e.keyCode == 123) {
+        alert('禁止使用F12');
+        return false;
+    } else if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        alert('禁止使用开发者工具');
+        return false;
+    }
+}
+
 // DOM元素引用
 const calculateBtn = document.getElementById('calculateBtn');
 const shareBtn = document.getElementById('shareBtn');
@@ -18,7 +33,7 @@ function calculateLifeCost() {
     const workDays = parseFloat(document.getElementById('workDays').value);
     const hoursPerDay = parseFloat(document.getElementById('hoursPerDay').value);
     const itemPrice = parseFloat(document.getElementById('itemPrice').value);
-    
+
     // 验证输入
     if ([income, workDays, hoursPerDay, itemPrice].some(isNaN)) {
         alert('请填写有效的数字！');
@@ -30,17 +45,21 @@ function calculateLifeCost() {
     const hourlyWage = income / monthlyHours;
     const hoursNeeded = itemPrice / hourlyWage;
     const daysNeeded = hoursNeeded / hoursPerDay;
-    
+
     // 显示结果
-    document.getElementById('timeCost').innerHTML = 
+    document.getElementById('timeCost').innerHTML =
         `你需要工作 <strong>${hoursNeeded.toFixed(1)} 小时</strong>（约 ${daysNeeded.toFixed(1)} 个工作日）才能购买这个商品。`;
-    
+
     // 随机选择对比文案
-    const randomComparison = COMPARISONS[Math.floor(Math.random() * COMPARISONS.length)];
-    document.getElementById('comparison').innerHTML = randomComparison(hoursNeeded);
-    
+    selectComparisons(hoursNeeded)
+
     // 显示结果区域
     resultDiv.style.display = 'block';
+}
+// 选择对比文案
+function selectComparisons(numNeeded) {
+    const randomComparison = COMPARISONS[Math.floor(Math.random() * COMPARISONS.length)];
+    document.getElementById('comparison').innerHTML = randomComparison(numNeeded);
 }
 
 // 分享结果
@@ -48,7 +67,7 @@ function shareResult() {
     const timeCostText = document.getElementById('timeCost').innerText;
     const comparisonText = document.getElementById('comparison').innerText;
     const shareText = `我刚用TimeCost算了一笔账：${timeCostText} ${comparisonText} 你的消费值多少生命时间？`;
-    
+
     // 尝试使用Web Share API（支持现代浏览器）
     if (navigator.share) {
         navigator.share({
@@ -79,7 +98,7 @@ shareBtn.addEventListener('click', shareResult);
 
 // 初始化输入框校验
 document.querySelectorAll('input[type="number"]').forEach(input => {
-    input.addEventListener('input', function() {
+    input.addEventListener('input', function () {
         this.value = this.value.replace(/[^0-9.]/g, '');
     });
 });
