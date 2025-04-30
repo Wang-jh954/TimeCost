@@ -1,17 +1,15 @@
 // 禁止查看源代码
-document.oncontextmenu = function () {
-    alert('禁止使用右键菜单');
-    return false;
-}
-document.onkeydown = function (e) {
-    if (e.keyCode == 123) {
-        alert('禁止使用F12');
-        return false;
-    } else if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-        alert('禁止使用开发者工具');
-        return false;
+document.oncontextmenu = function(e) {
+    e.preventDefault();
+    console.log("右键菜单已禁用，请联系管理员获取帮助。");
+};
+
+document.onkeydown = function(e) {
+    if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+        e.preventDefault();
+        console.log("开发者工具已禁用，如需调试请联系管理员。");
     }
-}
+};
 
 // DOM元素引用
 const calculateBtn = document.getElementById('calculateBtn');
